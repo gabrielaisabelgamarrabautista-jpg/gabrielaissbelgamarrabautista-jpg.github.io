@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>GaDiel</title>
+    <script src="https://kit.fontawesome.com/283335a286.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Arima+Madurai:wght@700&family=Mulish:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+
+<body>
+    <header class="encabezado">
+        <div class="contenedor-navegacion">
+            <div class="contenido-navegacion contenedor">
+                <div class="logo">
+                    <h2>GaDiel</h2>
+                </div>
+                <nav class="navegacion ocultar">
+                    <a href="#">Inicio</a>
+                    <a href="#">Sobre Nosotros</a>
+                    <a href="#">Menú</a>
+                    <a href="#">Contacto</a>
+                </nav>
+                <div class="hamburguesa">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        </div>
+        <div class="contenido-header">
+            <div class="contenedor-encabezado">
+                 <div class="texto-encabezado">
+    <h2>Transparencia en cada avance, claridad en cada meta.</h2>
+    <!-- Aquí cambiamos el enlace -->
+    <a href="index2.html" class="btn bordes">Comienza ahora</a>
+</div>
+
+        
+                <video autoplay loop muted>
+                    <source src="/assets/bg_video.mp4">
+                </video>
+            </div>
+        </div>
+    </header>
+
+    <div class="contenedor-nosotros contenedor">
+        <div class="texto-nosotros">
+            <p class="bienvenida">Bienvenido a!</p>
+            <h1>GaDiel</h1>
+            <p>Con Power BI impulsamos la eficiencia y transparencia en las inversiones públicas del PRONIS en Cusco. A través de un panel interactivo, podrás visualizar en tiempo real el avance de las obras, con indicadores claros de alcance, tiempo y presupuesto. Así, transformamos los datos en información confiable que facilita la toma de decisiones y asegura una mejor gestión de los proyectos de salud para la región.
+                </p>
+           
+        </div>
+        <div class="imagenes-nosotros">
+            <div class="imagen1">
+                <img data-src="assets/img/ing.jpg" alt="ingenieros viendo un pano">
+            </div>
+            <div class="imagenes2">
+                <img data-src="assets/img/lapto.jpg" alt="imagen de dasword">
+                <img data-src="assets/img/portada1.jpg" alt="mejorando">
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <section class="container about">
+            <h2 class="subtitle">¿Qué información verás en este dashboard?</h2>
+            <p class="about__paragraph">Todo lo necesario para analizar y evaluar las obras del PRONIS en Cusco (alcance, tiempo, presupuesto y más)., (Flexbox, Grid, Custom properties,
+                Position, Animaciones, Box Model y más)</p>
+
+            <div class="about__main">
+                <article class="about__icons">
+                    <img data-src="assets/img/shapes.svg" class="about__icon">
+                    <h3 class="about__title">Alcance de las obras</h3>
+                    <p class="about__paragrah">Indicadores del número de proyectos, infraestructura ejecutada y cobertura poblacional beneficiada
+                        </p>
+                </article>
+
+                <article class="about__icons">
+                    <img data-src="assets/img/paint.svg" class="about__icon">
+                    <h3 class="about__title">Presupuesto y Recursos</h3>
+                    <p class="about__paragrah">Inversión planificada vs. ejecutada, control de costos y eficiencia en la asignación de recursos.
+                        </p>
+                </article>
+
+                <article class="about__icons">
+                    <img data-src="assets/img/code.svg" class="about__icon">
+                    <h3 class="about__title">Estado de Avance</h3>
+                    <p class="about__paragrah">Visualización del progreso de las obras: terminadas, en ejecución o paralizadas.
+                        </p>
+                </article>
+            </div>
+        </section>
+
+       <section class="testimony">
+            <div class="testimony__container container">
+                <img data-src="assets/img/leftarrow.svg" class="testimony__arrow" id="before">
+
+                <section class="testimony__body testimony__body--show" data-id="1">
+                    <div class="testimony__texts">
+                        <h2 class="subtitle">Mi nombre es Diego Cotaquispe, <span class="testimony__course">Ingeniero Civil.</span></h2>
+                        <p class="testimony__review">Hola, soy Diego, ingeniero civil. Esta página nace con el propósito de mostrar de manera sencilla y transparente cómo avanzan los proyectos, reflejando su costo, tiempo y alcance</p>
+                    </div>
+
+                    <figure class="testimony__picture">
+                        <img data-src="assets/img/diego1.png" class="testimony__img" alt="foto de diego">
+                    </figure>
+                </section>
+
+                <section class="testimony__body" data-id="2">
+                    <div class="testimony__texts">
+                        <h2 class="subtitle">Mi nombre es Gabriela Gamarra, <span class="testimony__course">Ingeniera Civil.</span></h2>
+                        <p class="testimony__review">Soy Gabriela, estudiante de ingeniería civil. Junto con Diego hemos creado este espacio para que la comunidad pueda seguir de cerca el progreso real de cada obra.</p>
+                    </div>
+
+                    <figure class="testimony__picture">
+                        <img data-src="imagenes/Gabriela.png" class="testimony__img" alt="foto de gabriela"> 
+                    </figure>
+                </section>
+
+                <img data-src="assets/img/rightarrow.svg" class="testimony__arrow" id="next">
+            </div>
+        </section>
+
+   <section class="questions section">
+  <h2 class="subtitle">Preguntas frecuentes</h2>
+  <p class="questions__copy">
+    Visualiza con claridad el desempeño de las obras en salud de PRONIS en Cusco mediante gráficos dinámicos.
+  </p>
+
+  <div class="questions__container">
+
+    <!-- Pregunta 1 -->
+    <article class="questions__padding">
+      <div class="questions__answer">
+        <h3 class="questions__title">
+          ¿Qué información encontrará en este panel?
+          <span class="questions__arrow">
+            <!-- Flecha SVG -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="questions__img" fill="none" viewBox="0 0 24 24" stroke="white">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </span>
+        </h3>
+        <p class="questions__show">
+          Aquí se detalla el avance de las obras de PRONIS en Cusco, incluyendo indicadores de tiempo, presupuesto y alcance de cada proyecto.
+        </p>
+      </div>
+    </article>
+
+    <!-- Pregunta 2 -->
+    <article class="questions__padding">
+      <div class="questions__answer">
+        <h3 class="questions__title">
+          ¿Cómo interpretar el avance del tiempo y el cronograma?
+          <span class="questions__arrow">
+            <svg xmlns="http://www.w3.org/2000/svg" class="questions__img" fill="none" viewBox="0 0 24 24" stroke="white">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </span>
+        </h3>
+        <p class="questions__show">
+          Se muestran los plazos establecidos y el estado actual de ejecución, permitiendo identificar si las obras están dentro o fuera del cronograma.
+        </p>
+      </div>
+    </article>
+
+    <!-- Pregunta 3 -->
+    <article class="questions__padding">
+      <div class="questions__answer">
+        <h3 class="questions__title">
+          ¿Cómo se presenta el presupuesto de las obras?
+          <span class="questions__arrow">
+            <svg xmlns="http://www.w3.org/2000/svg" class="questions__img" fill="none" viewBox="0 0 24 24" stroke="white">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </span>
+        </h3>
+        <p class="questions__show">
+          En este panel podrás ver el presupuesto planificado frente al ejecutado, así como los indicadores de desempeño financiero.
+        </p>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+    <footer class="footer">
+        <section class="footer__container container">
+            <nav class="nav nav--footer">
+                <h2 class="footer__title">GaDiel.</h2>
+
+                <ul class="nav__link nav__link--footer">
+                    <li class="nav__items">
+                        <a href="#" class="nav__links">Inicio</a>
+                    </li>
+                    <li class="nav__items">
+                        <a href="#" class="nav__links">Acerca de</a>
+                    </li>
+                    <li class="nav__items">
+                        <a href="#" class="nav__links">Contacto</a>
+                    </li>
+                    <li class="nav__items">
+                        <a href="#" class="nav__links">Blog</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <form class="footer__form" action="https://formspree.io/f/mknkkrkj" method="POST">
+                <h2 class="footer__newsletter">Suscribete</h2>
+                <div class="footer__inputs">
+                    <input type="email" placeholder="Email:" class="footer__input" name="_replyto">
+                    <input type="submit" value="Registrate" class="footer__submit">
+                </div>
+            </form>
+        </section>
+
+        <section class="footer__copy container">
+            <div class="footer__social">
+                <a href="#" class="footer__icons"><img data-src="assets/img/facebook.svg" class="footer__img"></a>
+                <a href="#" class="footer__icons"><img data-src="assets/img/twitter.svg" class="footer__img"></a>
+                <a href="#" class="footer__icons"><img data-src="assets/img/yootube.svg" class="footer__img"></a>
+            </div>
+
+            <h3 class="footer__copyright">Derechos reservados &copy; Ga</h3>
+        </section>
+    </footer>
+
+    
+    <script src="./js/questions.js"></script>
+    <script src="./js/menu.js"></script>
+    <script src="js/app.js"></script>
+    <script src="./js/slider.js"></script>
+
+</body>
+</html>
