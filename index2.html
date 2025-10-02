@@ -1,165 +1,121 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard PRONIS</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background: #f8f9fa;
-      color: #333;
-    }
-    header {
-      background: #004085;
-      color: white;
-      padding: 20px;
-      text-align: center;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 28px;
-    }
-    .container {
-      padding: 20px;
-    }
-    .kpis {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 15px;
-      margin-bottom: 20px;
-    }
-    .kpi {
-      background: white;
-      padding: 15px;
-      border-radius: 12px;
-      text-align: center;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-      transition: transform 0.2s;
-    }
-    .kpi:hover {
-      transform: scale(1.05);
-    }
-    .kpi h2 {
-      margin: 0;
-      font-size: 18px;
-      color: #004085;
-    }
-    .kpi p {
-      font-size: 22px;
-      font-weight: bold;
-      margin: 10px 0 0;
-    }
-    .dashboard {
-      margin: 40px 0;
-    }
-    iframe {
-      width: 100%;       /* Ocupar todo el ancho */
-      height: 700px;     /* Más alto */
-      border: none;
-      border-radius: 12px;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-    }
-    #map {
-      height: 400px;
-      border-radius: 12px;
-      margin-bottom: 20px;
-    }
-    .btn {
-      display: inline-block;
-      margin: 20px 0;
-      padding: 12px 25px;
-      background: #004085;
-      color: white;
-      text-decoration: none;
-      border-radius: 8px;
-      font-size: 16px;
-      transition: background 0.3s;
-    }
-    .btn:hover {
-      background: #0056b3;
-    }
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard de Obras Públicas - Plantilla Completa</title>
 
-  <!-- Leaflet mapa -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- FontAwesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+  <style>
+    :root{--primary:#004e92;--accent:#00a896;--muted:#6c757d;--card-bg:#ffffff;--page-bg:linear-gradient(180deg,#f4f7fb 0%, #eef3f8 100%);}
+    html,body{height:100%}
+    body{margin:0;font-family:"Inter","Segoe UI",Roboto,Arial,sans-serif;background:var(--page-bg);color:#222}
+    header.site-header{background:linear-gradient(90deg,var(--primary),#006d7a);color:white;padding:2.2rem 1rem;box-shadow:0 6px 18px rgba(2,6,23,.15);border-bottom-left-radius:18px;border-bottom-right-radius:18px}
+    header .brand{display:flex;align-items:center;gap:.8rem}
+    header .brand .logo{width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:24px;border:1px solid rgba(255,255,255,0.08)}
+    header h1{margin:0;font-size:1.6rem;letter-spacing:.2px}
+    header p.lead{margin:0;font-size:.95rem;opacity:.95}
+    nav.main-nav{margin-top:1rem}
+    nav.main-nav .nav-link{color:rgba(255,255,255,.95);font-weight:600}
+    .kpi-row{margin-top:-2.2rem}
+    .kpi-card{border-radius:12px;background:var(--card-bg);padding:1rem;box-shadow:0 8px 20px rgba(16,24,40,.06);transition:transform .18s ease,box-shadow .18s ease;cursor:pointer}
+    .kpi-card:hover{transform:translateY(-8px);box-shadow:0 18px 40px rgba(16,24,40,.12)}
+    .kpi-icon{width:56px;height:56px;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;margin-right:.8rem;font-size:22px;color:white;box-shadow:0 6px 18px rgba(2,6,23,.08)}
+    .icon-blue{background:linear-gradient(135deg,#007bff,#0056b3)}
+    .icon-orange{background:linear-gradient(135deg,#ff9800,#f57c00)}
+    .icon-green{background:linear-gradient(135deg,#28a745,#1e7e34)}
+    .icon-red{background:linear-gradient(135deg,#dc3545,#a71d2a)}
+    .kpi-title{font-size:.9rem;color:var(--muted);margin:0}
+    .kpi-value{font-weight:700;font-size:1.35rem;margin:0}
+    .dash-box{min-height:260px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,.98),rgba(255,255,255,.95));box-shadow:0 10px 20px rgba(15,23,42,.05);padding:1rem;display:flex;flex-direction:column;gap:.6rem}
+    .dash-header{display:flex;align-items:center;justify-content:space-between;gap:.6rem;margin-bottom:.4rem}
+    .dash-title{font-weight:600;color:#123;font-size:.98rem}
+    .placeholder{flex:1;border:2px dashed rgba(0,0,0,.06);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.95rem;padding:1rem;text-align:center;background:linear-gradient(0deg,rgba(0,0,0,.01),rgba(0,0,0,0))}
+    #map{height:420px;border-radius:12px;overflow:hidden}
+    .iframe-container{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px}
+    .iframe-container iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+    footer{padding:1.2rem 0;text-align:center;color:var(--muted);font-size:.9rem;margin-top:2.5rem}
+    .fade-up{opacity:0;transform:translateY(8px);transition:all .6s ease}
+    .fade-up.visible{opacity:1;transform:none}
+  </style>
 </head>
 <body>
-  <header>
-    <h1>Dashboard PRONIS - Transparencia y Eficiencia</h1>
+  <header class="site-header">
+    <div class="container">
+      <div class="d-flex align-items-center justify-content-between flex-wrap">
+        <div class="brand d-flex align-items-center">
+          <div class="logo"><i class="fa-solid fa-building-columns" style="color:white"></i></div>
+          <div>
+            <h1>Dashboard de Obras Públicas</h1>
+            <p class="lead">Monitorea KPIs y proyectos — plantilla visual y descargable.</p>
+          </div>
+        </div>
+        <div class="text-end mt-3 mt-md-0">
+          <button class="btn btn-light btn-sm" id="downloadBtn"><i class="fa-solid fa-download"></i> Plantilla descargable</button>
+        </div>
+      </div>
+      <nav class="main-nav mt-3">
+        <ul class="nav">
+          <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="#proyectos">Proyectos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#indicadores">Indicadores</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
-  <div class="container">
+  <main class="container my-4" id="inicio">
     <!-- KPIs -->
-    <div class="kpis">
-      <div class="kpi">
-        <h2>Proyectos en Ejecución</h2>
-        <p>125</p>
+    <section class="kpi-row">
+      <div class="row g-3">
+        <div class="col-md-3"><div class="kpi-card d-flex align-items-center"><div class="kpi-icon icon-blue"><i class="fa-solid fa-chart-line"></i></div><div><p class="kpi-title">Avance de obras</p><p class="kpi-value" id="kpi-avance">68%</p></div></div></div>
+        <div class="col-md-3"><div class="kpi-card d-flex align-items-center"><div class="kpi-icon icon-orange"><i class="fa-solid fa-wallet"></i></div><div><p class="kpi-title">Ejecución presupuestal</p><p class="kpi-value" id="kpi-presupuesto">54%</p></div></div></div>
+        <div class="col-md-3"><div class="kpi-card d-flex align-items-center"><div class="kpi-icon icon-green"><i class="fa-solid fa-clock"></i></div><div><p class="kpi-title">Tiempo promedio</p><p class="kpi-value" id="kpi-tiempo">42 días</p></div></div></div>
+        <div class="col-md-3"><div class="kpi-card d-flex align-items-center"><div class="kpi-icon icon-red"><i class="fa-solid fa-check"></i></div><div><p class="kpi-title">Proyectos sin observaciones</p><p class="kpi-value" id="kpi-calidad">12</p></div></div></div>
       </div>
-      <div class="kpi">
-        <h2>Avance Promedio</h2>
-        <p>72%</p>
-      </div>
-      <div class="kpi">
-        <h2>Inversión Total</h2>
-        <p>S/ 450M</p>
-      </div>
-      <div class="kpi">
-        <h2>Obras Finalizadas</h2>
-        <p>89</p>
-      </div>
-    </div>
+    </section>
 
     <!-- Mapa -->
-    <h2>Mapa de Proyectos en Cusco</h2>
-    <div id="map"></div>
+    <section id="proyectos" class="mt-4">
+      <h2>Mapa del Departamento de Cusco</h2>
+      <div class="dash-box"><div id="map"></div><small class="text-muted">El mapa está centrado en Cusco. Puedes agregar marcadores.</small></div>
+    </section>
 
-    <!-- Dashboards Power BI -->
-    <div class="dashboard">
-      <h2>Panorama General</h2>
-      <iframe src="https://app.powerbi.com/view?r=eyJrIjoiNjAwZDhhYTMtZmFmMC00ZTlmLWI1NmYtYzJhZDYxMjVjMGM4IiwidCI6IjBlMGNiMDYwLTA5YWQtNDlmNS1hMDA1LTY4YjliNDlhYTFmNiIsImMiOjR9" allowFullScreen="true"></iframe>
-    </div>
+    <!-- Dashboards -->
+    <section id="indicadores" class="mt-4">
+      <h2>Dashboards de Obras</h2>
+      <div class="row g-4">
+        <div class="col-12"><div class="dash-box"><div class="dash-header"><div class="dash-title">Dashboard 1</div></div><div class="iframe-container"><iframe src="TU_IFRAME_POWERBI_1" allowfullscreen></iframe></div></div></div>
+        <div class="col-12"><div class="dash-box"><div class="dash-header"><div class="dash-title">Dashboard 2</div></div><div class="iframe-container"><iframe src="TU_IFRAME_POWERBI_2" allowfullscreen></iframe></div></div></div>
+      </div>
+    </section>
+  </main>
 
-    <div class="dashboard">
-      <h2>Análisis por Contratista</h2>
-      <iframe src="https://app.powerbi.com/view?r=eyJrIjoiOTkzZjY1NzgtNzcyYy00ZjdlLTlmOWYtZjFlZmZiNTgxNjc3IiwidCI6IjBlMGNiMDYwLTA5YWQtNDlmNS1hMDA1LTY4YjliNDlhYTFmNiIsImMiOjR9" allowFullScreen="true"></iframe>
-    </div>
+  <footer><div class="container"><small>© 2025 Dashboard de Obras Públicas</small></div></footer>
 
-    <!-- Espacios para más dashboards -->
-    <div class="dashboard">
-      <h2>Dashboard 3</h2>
-      <iframe src=""></iframe>
-    </div>
-    <div class="dashboard">
-      <h2>Dashboard 4</h2>
-      <iframe src=""></iframe>
-    </div>
-    <div class="dashboard">
-      <h2>Dashboard 5</h2>
-      <iframe src=""></iframe>
-    </div>
-    <div class="dashboard">
-      <h2>Dashboard 6</h2>
-      <iframe src=""></iframe>
-    </div>
-
-    <!-- Botón -->
-    <a href="ga_dashboard_unificado.html" class="btn">Descargar Plantilla</a>
-  </div>
-
+  <!-- Scripts -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
-    // Mapa Leaflet
-    var map = L.map('map').setView([-13.53195, -71.967463], 7); // Cusco
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© OpenStreetMap contributors'
-    }).addTo(map);
-
-    // Marcador de ejemplo
-    L.marker([-13.53195, -71.967463]).addTo(map)
-      .bindPopup("Proyecto PRONIS - Cusco")
-      .openPopup();
+    var map=L.map('map',{center:[-13.53195,-71.96746],zoom:7,scrollWheelZoom:false});
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'}).addTo(map);
+    L.marker([-13.53195,-71.96746]).addTo(map).bindPopup("Cusco — Ejemplo");
+  </script>
+  <script>
+    document.getElementById('downloadBtn').addEventListener('click',function(){
+      var html='<!doctype html>\\n'+document.documentElement.outerHTML;
+      var blob=new Blob([html],{type:'text/html'});
+      var url=URL.createObjectURL(blob);
+      var a=document.createElement('a');a.href=url;a.download='dashboard_obras.html';a.click();URL.revokeObjectURL(url);
+    });
   </script>
 </body>
 </html>
