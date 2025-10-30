@@ -1,172 +1,52 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard de Obras Públicas</title>
-
-  <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- FontAwesome -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-  <!-- Leaflet -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
-  <style>
-    body { background:#f4f7fb; font-family: "Segoe UI", sans-serif; }
-    header.navbar {
-      background: linear-gradient(90deg,#004e92,#006d7a);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-    .navbar-brand { font-weight:700; color:white !important; }
-    .navbar-brand i { margin-right:8px; }
-    .nav-link { color:white !important; font-weight:500; }
-    .btn-download {
-      background:white; color:#004085; font-weight:600; border-radius:6px;
-    }
-    .kpi-card {
-      display:flex;align-items:center;gap:12px;
-      padding:16px;border-radius:12px;
-      background:white;box-shadow:0 4px 10px rgba(0,0,0,0.05);
-      transition:.2s;
-    }
-    .kpi-card:hover { transform: translateY(-5px); }
-    .kpi-icon {
-      width:50px;height:50px;border-radius:12px;
-      display:flex;align-items:center;justify-content:center;
-      color:white;font-size:22px;
-    }
-    .blue { background:#007bff; }
-    .orange { background:#ff9800; }
-    .green { background:#28a745; }
-    .red { background:#dc3545; }
-    #map { height:420px; border-radius:12px; margin-bottom:20px; }
-    iframe {
-      width:100%; height:600px;
-      border:none; border-radius:12px;
-      box-shadow:0 3px 8px rgba(0,0,0,0.1);
-    }
-    footer {
-      background:#fff;border-top:1px solid #ddd;
-      padding:15px;text-align:center;color:#555;
-      margin-top:40px;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboards Power BI | PRONIS Cusco</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-  <!-- Navbar -->
-  <header class="navbar navbar-expand-lg navbar-dark px-3">
-    <a class="navbar-brand" href="#">
-      <i class="fa-solid fa-building-columns"></i> Dashboard de Obras Públicas
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-4">
-        <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
-        <li class="nav-item"><a class="nav-link" href="#proyectos">Proyectos</a></li>
-        <li class="nav-item"><a class="nav-link" href="#indicadores">Indicadores</a></li>
-        <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
-      </ul>
-    </div>
-    <button class="btn btn-download ms-auto" id="downloadBtn">
-      <i class="fa-solid fa-download"></i> Plantilla descargable
-    </button>
-  </header>
+<body class="bg-gradient-to-br from-gray-50 via-white to-blue-50">
 
-  <!-- KPIs -->
-  <section class="container my-4" id="inicio">
-    <div class="row g-3">
-      <div class="col-md-3">
-        <div class="kpi-card">
-          <div class="kpi-icon blue"><i class="fa-solid fa-chart-line"></i></div>
-          <div><small>Avance de obras</small><div class="fw-bold fs-5">68%</div></div>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="kpi-card">
-          <div class="kpi-icon orange"><i class="fa-solid fa-wallet"></i></div>
-          <div><small>Ejecución presupuestal</small><div class="fw-bold fs-5">54%</div></div>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="kpi-card">
-          <div class="kpi-icon green"><i class="fa-solid fa-clock"></i></div>
-          <div><small>Tiempo promedio de entrega</small><div class="fw-bold fs-5">42 días</div></div>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="kpi-card">
-          <div class="kpi-icon red"><i class="fa-solid fa-check"></i></div>
-          <div><small>Proyectos sin observaciones</small><div class="fw-bold fs-5">12</div></div>
-        </div>
-      </div>
+  <!-- Contenedor principal -->
+  <section class="py-12 px-4 container mx-auto">
+    <div class="text-center mb-10">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+        Dashboards Power BI
+      </h2>
+      <p class="text-gray-600 max-w-3xl mx-auto">
+        Análisis visual interactivo de los proyectos del PRONIS Cusco. 
+        Haz clic en "Editar" para agregar el enlace iframe de tu dashboard de Power BI.
+      </p>
+    </div>
+
+    <!-- Tarjetas de dashboards -->
+    <div id="dashboards-container" class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <!-- Aquí se insertarán los dashboards dinámicamente -->
+    </div>
+
+    <!-- Guía de ayuda -->
+    <div class="mt-12 bg-cyan-50 border border-cyan-200 rounded-xl p-6">
+      <h3 class="text-lg font-bold text-cyan-900 mb-3">
+        💡 ¿Cómo agregar tu dashboard de Power BI?
+      </h3>
+      <ol class="space-y-2 text-sm text-cyan-800">
+        <li>1. Abre tu dashboard en Power BI Service</li>
+        <li>2. Haz clic en "Archivo" → "Insertar informe" → "Sitio web o portal"</li>
+        <li>3. Copia la URL que aparece en el atributo <code>src</code> del iframe</li>
+        <li>4. Haz clic en "Agregar Dashboard" y pega la URL</li>
+        <li>5. Guarda los cambios y tu dashboard aparecerá aquí</li>
+      </ol>
     </div>
   </section>
 
-  <!-- Mapa -->
-  <section class="container" id="proyectos">
-    <h3 class="mb-3">Mapa de Proyectos en Cusco</h3>
-    <div id="map"></div>
-  </section>
-
-  <!-- Dashboards -->
-  <section class="container my-5" id="indicadores">
-    <h3 class="mb-4">Dashboards Power BI</h3>
-    <div class="mb-5">
-      <h5>Panorama General</h5>
-    <iframe title="Dashboard Panorama General" width="600" height="373.5" src="https://app.powerbi.com/view?r=eyJrIjoiNTMzZmZhOTEtMWE1YS00YzA3LTlmYWItNDBlZDM2NDViNmU2IiwidCI6IjBlMGNiMDYwLTA5YWQtNDlmNS1hMDA1LTY4YjliNDlhYTFmNiIsImMiOjR9" frameborder="0" allowFullScreen="true"></iframe> 
-    </div>
-    <div class="mb-5">
-      <h5>Análisis por Contratista</h5>
-      <iframe src="https://app.powerbi.com/view?r=eyJrIjoiOTkzZjY1NzgtNzcyYy00ZjdlLTlmOWYtZjFlZmZiNTgxNjc3IiwidCI6IjBlMGNiMDYwLTA5YWQtNDlmNS1hMDA1LTY4YjliNDlhYTFmNiIsImMiOjR9" allowfullscreen></iframe>
-    </div>
-    <!-- Espacios para más -->
-    <div class="row g-4">
-      <div class="col-md-6">
-        <h6>Dashboard 3</h6>
-        <iframe title="Indicadores" width="600" height="373.5" src="https://app.powerbi.com/view?r=eyJrIjoiMDhjMjFiNGMtYjdiNi00MzRhLWI3OGItZmVhYThjN2E1ZWU5IiwidCI6IjBlMGNiMDYwLTA5YWQtNDlmNS1hMDA1LTY4YjliNDlhYTFmNiIsImMiOjR9" frameborder="0" allowFullScreen="true"></iframe> 
-      </div>
-      <div class="col-md-6">
-        <h6>Dashboard 4</h6>
-       <iframe title="Curva S" width="600" height="373.5" src="https://app.powerbi.com/view?r=eyJrIjoiZDVlMTZhNWItYzRhZi00ZGRjLWI2M2UtNTEyN2NlMWI1Mzg5IiwidCI6IjBlMGNiMDYwLTA5YWQtNDlmNS1hMDA1LTY4YjliNDlhYTFmNiIsImMiOjR9" frameborder="0" allowFullScreen="true"></iframe>
-      </div>
-      <div class="col-md-6"><h6>Dashboard 5</h6><iframe src=""></iframe></div>
-      <div class="col-md-6"><h6>Dashboard 6</h6><iframe src=""></iframe></div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    © 2025 Dashboard de Obras Públicas — Transparencia y eficiencia.
-  </footer>
-
-  <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    // Mapa
-    var map = L.map('map').setView([-13.53195,-71.96746], 7);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution:'© OpenStreetMap contributors'
-    }).addTo(map);
-    L.marker([-13.53195,-71.96746]).addTo(map)
-      .bindPopup("Proyecto PRONIS - Cusco").openPopup();
-
-    // Descargar HTML
-    document.getElementById("downloadBtn").addEventListener("click", ()=>{
-      var blob = new Blob([document.documentElement.outerHTML], {type: "text/html"});
-      var url = URL.createObjectURL(blob);
-      var a = document.createElement("a");
-      a.href = url;
-      a.download = "dashboard_obras.html";
-      a.click();
-      URL.revokeObjectURL(url);
-    });
-  </script>
-</body>
-</html>
+    // Simulación de datos (en lugar de Supabase)
+    const dashboards = [
+      {
+        id: 1,
+        titulo: "Avance Físico - Hospital Cusco",
+        descripcion: "Das
 
 
 
