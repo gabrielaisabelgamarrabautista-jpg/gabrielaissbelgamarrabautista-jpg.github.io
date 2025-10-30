@@ -46,7 +46,64 @@
       {
         id: 1,
         titulo: "Avance Físico - Hospital Cusco",
-        descripcion: "Das
+        descripcion: "Dashboard de avance físico acumulado.",
+        iframe_url: "https://app.powerbi.com/view?r=tu_dashboard_aqui"
+      },
+      {
+        id: 2,
+        titulo: "Ejecución Presupuestal - Cusco",
+        descripcion: "Comparación entre presupuesto y costo real.",
+        iframe_url: ""
+      }
+    ];
+
+    const container = document.getElementById("dashboards-container");
+
+    dashboards.forEach((dashboard) => {
+      const card = document.createElement("div");
+      card.className = "bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200";
+
+      card.innerHTML = `
+        <div class="bg-gradient-to-r from-cyan-600 to-sky-600 text-white p-6">
+          <h3 class="text-xl font-bold mb-2">${dashboard.titulo}</h3>
+          <p class="text-blue-100 text-sm">${dashboard.descripcion}</p>
+        </div>
+
+        <div class="p-6">
+          ${
+            dashboard.iframe_url
+              ? `<div class="bg-gray-100 rounded-lg overflow-hidden mb-4" style="height: 400px;">
+                  <iframe src="${dashboard.iframe_url}" class="w-full h-full border-0" allowfullscreen></iframe>
+                </div>
+                <button class="editar-btn bg-cyan-600 text-white px-5 py-2 rounded-lg hover:bg-cyan-700" data-id="${dashboard.id}">
+                  Editar Dashboard
+                </button>`
+              : `<div class="text-center py-12">
+                  <div class="bg-cyan-50 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                    📊
+                  </div>
+                  <p class="text-gray-600 mb-4">Aún no has agregado el dashboard de Power BI</p>
+                  <button class="agregar-btn bg-cyan-600 text-white px-6 py-3 rounded-lg hover:bg-cyan-700" data-id="${dashboard.id}">
+                    Agregar Dashboard
+                  </button>
+                </div>`
+          }
+        </div>
+      `;
+      container.appendChild(card);
+    });
+
+    // Interacción simple
+    document.addEventListener("click", (e) => {
+      if (e.target.classList.contains("agregar-btn") || e.target.classList.contains("editar-btn")) {
+        const id = e.target.dataset.id;
+        const url = prompt("Pega aquí la URL del iframe de Power BI:");
+        if (url) alert(`✅ Dashboard actualizado (ID: ${id}) con URL:\n${url}`);
+      }
+    });
+  </script>
+</body>
+</html>
 
 
 
