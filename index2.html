@@ -3,58 +3,211 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard PRONIS Cusco - GaDiel</title>
+  <title>Dashboards Power BI - PRONIS Cusco</title>
 
+  <!-- Fuentes y estilos -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/scrollreveal"></script>
   <style>
-    body {
-      margin: 0;
-      background-color: #0f172a;
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      color: #f1f5f9;
+    :root {
+      --azul: #0056d2;
+      --celeste: #eaf2ff;
+      --gris: #f9fafb;
     }
 
-    h1 {
-      color: #38bdf8;
-      margin-bottom: 20px;
-      font-size: 1.8rem;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: var(--gris);
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    header {
+      background: var(--azul);
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    header h1 {
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #cde0ff;
+    }
+
+    main {
+      padding: 3rem 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    h2 {
       text-align: center;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      color: var(--azul);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+      transition: transform 0.4s, box-shadow 0.4s;
+      opacity: 0;
+      transform: translateY(40px);
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-header {
+      background: linear-gradient(90deg, var(--azul), #007bff);
+      color: white;
+      padding: 1rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     iframe {
-      width: 90vw;
-      height: 80vh;
+      width: 100%;
+      height: 400px;
       border: none;
-      border-radius: 10px;
-      box-shadow: 0 0 25px rgba(56, 189, 248, 0.3);
+      display: block;
     }
 
-    a.volver {
-      color: #38bdf8;
-      margin-top: 15px;
-      text-decoration: none;
-      font-weight: bold;
+    footer {
+      text-align: center;
+      background: var(--azul);
+      color: white;
+      padding: 1.5rem 0;
+      margin-top: 3rem;
+      font-size: 0.9rem;
     }
 
-    a.volver:hover {
-      text-decoration: underline;
+    /* Animación ScrollReveal */
+    .visible {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+      transition: all 0.8s ease;
+    }
+
+    @media (max-width: 600px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+      iframe {
+        height: 320px;
+      }
     }
   </style>
 </head>
-
 <body>
-  <h1>Dashboard Interactivo PRONIS Cusco</h1>
+  <header>
+    <h1>PRONIS Cusco</h1>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="#">Obras</a>
+      <a href="#">Dashboards</a>
+      <a href="#">Contacto</a>
+    </nav>
+  </header>
 
-  <!-- 🔹 Aquí reemplaza con tu link público de Power BI -->
-  <iframe 
-    src="https://app.powerbi.com/view?r=TU_LINK_DE_POWERBI_AQUI" 
-    allowFullScreen="true">
-  </iframe>
+  <main>
+    <h2>Dashboards Power BI Interactivos</h2>
 
-  <a href="index.html" class="volver">← Volver al inicio</a>
+    <div class="grid">
+      <!-- Dashboard 1 -->
+      <div class="card">
+        <div class="card-header">Avance Físico</div>
+        <iframe src="https://app.powerbi.com/view?r=TU_URL_AQUI" allowfullscreen></iframe>
+      </div>
+
+      <!-- Dashboard 2 -->
+      <div class="card">
+        <div class="card-header">Avance Financiero</div>
+        <iframe src="https://app.powerbi.com/view?r=TU_URL_AQUI" allowfullscreen></iframe>
+      </div>
+
+      <!-- Dashboard 3 -->
+      <div class="card">
+        <div class="card-header">Indicadores de Productividad</div>
+        <iframe src="https://app.powerbi.com/view?r=TU_URL_AQUI" allowfullscreen></iframe>
+      </div>
+
+      <!-- Dashboard 4 -->
+      <div class="card">
+        <div class="card-header">Control de Tiempos</div>
+        <iframe src="https://app.powerbi.com/view?r=TU_URL_AQUI" allowfullscreen></iframe>
+      </div>
+
+      <!-- Dashboard 5 -->
+      <div class="card">
+        <div class="card-header">Comparativo de Proyectos</div>
+        <iframe src="https://app.powerbi.com/view?r=TU_URL_AQUI" allowfullscreen></iframe>
+      </div>
+
+      <!-- Dashboard 6 -->
+      <div class="card">
+        <div class="card-header">KPIs Globales</div>
+        <iframe src="https://app.powerbi.com/view?r=TU_URL_AQUI" allowfullscreen></iframe>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 Proyecto PRONIS Cusco | Desarrollado por Laura
+  </footer>
+
+  <script>
+    // Animación de aparición suave al hacer scroll
+    const cards = document.querySelectorAll(".card");
+    function revealOnScroll() {
+      const triggerBottom = window.innerHeight * 0.85;
+      cards.forEach(card => {
+        const rect = card.getBoundingClientRect();
+        if (rect.top < triggerBottom) {
+          card.classList.add("visible");
+        }
+      });
+    }
+    window.addEventListener("scroll", revealOnScroll);
+    revealOnScroll();
+  </script>
 </body>
 </html>
+
+
