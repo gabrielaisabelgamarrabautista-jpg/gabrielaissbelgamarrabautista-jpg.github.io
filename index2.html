@@ -163,9 +163,475 @@ export default function Footer() {
     </footer>
   );
 }
+import { useState } from 'react';
+import { Menu, X, Building2 } from 'lucide-react';
+import { motion } from 'framer-motion';
+
+export default function Header({ activeSection, setActiveSection }) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const menuItems = [
+    { id: 'inicio', label: 'Inicio' },
+    { id: 'obras', label: 'Obras PRONIS Cusco' },
+    { id: 'dashboards', label: 'Dashboards Power BI' },
+    { id: 'contacto', label: 'Contacto' }
+  ];
+
+  return (
+    <header className="bg-gradient-to-r from-cyan-600 via-sky-500 to-blue-500 text-white sticky top-0 z-50 shadow-lg">
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-between py-4">
+          <div className="flex items-center gap-3">
+            <Building2 className="w-10 h-10" />
+            <div>
+              <h1 className="text-xl md:text-2xl font-bold">PRONIS Cusco</h1>
+              <p className="text-xs md:text-sm text-blue-100">Transparencia en Obras de Salud</p>
+            </div>
+          </div>
+
+          {/* Desktop Menu */}
+          <nav className="hidden md:flex items-center gap-6">
+            {menuItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => setActiveSection(item.id)}
+                className={`px-4 py-2 rounded-lg transition-all font-medium ${
+                  activeSection === item.id
+                    ? 'bg-white text-blue-800 shadow-md'
+                    : 'hover:bg-blue-600'
+                }`}
+              >
+                {item.label}
+              </button>
+            ))}
+          </nav>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="md:hidden p-2 hover:bg-blue-600 rounded-lg transition-colors"
+          >
+            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
+
+        {/* Mobile Menu */}
+        {isMenuOpen && (
+          <motion.nav
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="md:hidden pb-4 space-y-2"
+          >
+            {menuItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => {
+                  setActiveSection(item.id);
+                  setIsMenuOpen(false);
+                }}
+                className={`w-full px-4 py-3 rounded-lg text-left transition-all font-medium ${
+                  activeSection === item.id
+                    ? 'bg-white text-blue-800'
+                    : 'bg-blue-600 hover:bg-blue-500'
+                }`}
+              >
+                {item.label}
+              </button>
+            ))}
+          </motion.nav>
+        )}
+      </div>
+    </header>
+  );
+}
+import { motion } from 'framer-motion';
+import { TrendingUp, FileText, Activity } from 'lucide-react';
+
+export default function Hero() {
+  const stats = [
+    { icon: Activity, value: '6', label: 'Obras en Seguimiento', color: 'bg-blue-500' },
+    { icon: TrendingUp, value: 'S/ 318M', label: 'Inversión Total', color: 'bg-green-500' },
+    { icon: FileText, value: '6', label: 'Dashboards Activos', color: 'bg-purple-500' }
+  ];
+
+  return (
+    <div className="relative bg-gradient-to-br from-cyan-50 via-white to-blue-50 py-16 md:py-24 overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-0 left-0 w-96 h-96 bg-cyan-300 rounded-full filter blur-3xl"></div>
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-sky-300 rounded-full filter blur-3xl"></div>
+      </div>
+
+      <div className="container mx-auto px-4 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center max-w-4xl mx-auto"
+        >
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+            Transparencia e Innovación en la
+            <span className="text-cyan-600"> Gestión de Obras de Salud</span>
+          </h1>
+          <p className="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed">
+            Plataforma de seguimiento y análisis de los proyectos del Programa Nacional de Inversiones en Salud (PRONIS) 
+            en la región Cusco, mostrando de forma clara los avances, desafíos y oportunidades de mejora.
+          </p>
+        </motion.div>
+
+        {/* Stats Cards */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 max-w-5xl mx-auto"
+        >
+          {stats.map((stat, index) => (
+            <motion.div
+              key={index}
+              whileHover={{ scale: 1.05 }}
+              className="bg-white rounded-xl shadow-lg p-6 border border-gray-100"
+            >
+              <div className="flex items-center gap-4">
+                <div className={`${stat.color} p-4 rounded-lg`}>
+                  <stat.icon className="w-8 h-8 text-white" />
+                </div>
+                <div>
+                  <p className="text-3xl font-bold text-gray-900">{stat.value}</p>
+                  <p className="text-sm text-gray-600">{stat.label}</p>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </div>
+  );
+}
+import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { Search, MapPin, Calendar, DollarSign, Building } from 'lucide-react';
+import { supabase } from '../lib/supabase';
+
+export default function ObrasTable() {
+  const [obras, setObras] = useState([]);
+  const [filteredObras, setFilteredObras] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [provinciaFilter, setProvinciaFilter] = useState('Todas');
+  const [estadoFilter, setEstadoFilter] = useState('Todos');
+  const [loading, setLoading] = useState(true);
+  const [selectedObra, setSelectedObra] = useState(null);
+
+  useEffect(() => {
+    fetchObras();
+  }, []);
+
+  useEffect(() => {
+    filterObras();
+  }, [searchTerm, provinciaFilter, estadoFilter, obras]);
+
+  const fetchObras = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('obras')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      setObras(data || []);
+      setFilteredObras(data || []);
+    } catch (error) {
+      console.error('Error:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const filterObras = () => {
+    let filtered = obras;
+
+    if (searchTerm) {
+      filtered = filtered.filter(obra =>
+        obra.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        obra.contratista?.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    if (provinciaFilter !== 'Todas') {
+      filtered = filtered.filter(obra => obra.provincia === provinciaFilter);
+    }
+
+    if (estadoFilter !== 'Todos') {
+      filtered = filtered.filter(obra => obra.estado === estadoFilter);
+    }
+
+    setFilteredObras(filtered);
+  };
+
+  const provincias = ['Todas', ...new Set(obras.map(o => o.provincia))];
+  const estados = ['Todos', ...new Set(obras.map(o => o.estado))];
+
+  const getEstadoColor = (estado) => {
+    const colors = {
+      'En ejecución': 'bg-blue-100 text-blue-800 border-blue-300',
+      'Finalizado': 'bg-green-100 text-green-800 border-green-300',
+      'Detenido': 'bg-red-100 text-red-800 border-red-300'
+    };
+    return colors[estado] || 'bg-gray-100 text-gray-800 border-gray-300';
+  };
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center py-20">
+        <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-blue-600"></div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="bg-gray-50 py-12">
+      <div className="container mx-auto px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mb-8"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            Obras PRONIS Cusco
+          </h2>
+          <p className="text-gray-600">
+            Exploración detallada de proyectos de inversión en salud
+          </p>
+        </motion.div>
+
+        {/* Filters */}
+        <div className="bg-white rounded-xl shadow-md p-6 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+              <input
+                type="text"
+                placeholder="Buscar obra o contratista..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+              />
+            </div>
+
+            <select
+              value={provinciaFilter}
+              onChange={(e) => setProvinciaFilter(e.target.value)}
+              className="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+            >
+              {provincias.map(p => (
+                <option key={p} value={p}>{p}</option>
+              ))}
+            </select>
+
+            <select
+              value={estadoFilter}
+              onChange={(e) => setEstadoFilter(e.target.value)}
+              className="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+            >
+              {estados.map(e => (
+                <option key={e} value={e}>{e}</option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        {/* Results Count */}
+        <div className="mb-4 text-gray-600">
+          Mostrando {filteredObras.length} de {obras.length} obras
+        </div>
+
+        {/* Table */}
+        <div className="bg-white rounded-xl shadow-md overflow-hidden">
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead className="bg-gradient-to-r from-cyan-600 to-sky-600 text-white">
+                <tr>
+                  <th className="px-6 py-4 text-left text-sm font-semibold">Obra</th>
+                  <th className="px-6 py-4 text-left text-sm font-semibold">Provincia</th>
+                  <th className="px-6 py-4 text-left text-sm font-semibold">Estado</th>
+                  <th className="px-6 py-4 text-left text-sm font-semibold">Inversión</th>
+                  <th className="px-6 py-4 text-left text-sm font-semibold">Avance</th>
+                  <th className="px-6 py-4 text-left text-sm font-semibold">Acciones</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-200">
+                {filteredObras.map((obra, index) => (
+                  <motion.tr
+                    key={obra.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.05 }}
+                    className="hover:bg-cyan-50 transition-colors"
+                  >
+                    <td className="px-6 py-4">
+                      <div className="font-medium text-gray-900">{obra.nombre}</div>
+                      <div className="text-sm text-gray-500">{obra.contratista}</div>
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="flex items-center gap-2 text-gray-700">
+                        <MapPin className="w-4 h-4 text-cyan-600" />
+                        {obra.provincia}
+                      </div>
+                    </td>
+                    <td className="px-6 py-4">
+                      <span className={`px-3 py-1 rounded-full text-xs font-medium border ${getEstadoColor(obra.estado)}`}>
+                        {obra.estado}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4 text-gray-700 font-medium">
+                      S/ {(obra.monto_inversion / 1000000).toFixed(1)}M
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="space-y-2">
+                        <div>
+                          <div className="flex justify-between text-xs text-gray-600 mb-1">
+                            <span>Físico</span>
+                            <span>{obra.avance_fisico}%</span>
+                          </div>
+                          <div className="w-full bg-gray-200 rounded-full h-2">
+                            <div
+                              className="bg-cyan-600 h-2 rounded-full"
+                              style={{ width: `${obra.avance_fisico}%` }}
+                            ></div>
+                          </div>
+                        </div>
+                        <div>
+                          <div className="flex justify-between text-xs text-gray-600 mb-1">
+                            <span>Financiero</span>
+                            <span>{obra.avance_financiero}%</span>
+                          </div>
+                          <div className="w-full bg-gray-200 rounded-full h-2">
+                            <div
+                              className="bg-green-600 h-2 rounded-full"
+                              style={{ width: `${obra.avance_financiero}%` }}
+                            ></div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4">
+                      <button
+                        onClick={() => setSelectedObra(obra)}
+                        className="px-4 py-2 bg-cyan-600 text-white rounded-lg hover:bg-cyan-700 transition-colors text-sm font-medium"
+                      >
+                        Ver Detalle
+                      </button>
+                    </td>
+                  </motion.tr>
+                ))} 
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        {/* Modal Detalle */}
+        {selectedObra && (
+          <div
+            onClick={() => setSelectedObra(null)}
+            className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              onClick={(e) => e.stopPropagation()}
+              className="bg-white rounded-2xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto"
+            >
+              <div className="bg-gradient-to-r from-cyan-600 to-sky-600 text-white p-6">
+                <h3 className="text-2xl font-bold mb-2">{selectedObra.nombre}</h3>
+                <p className="text-blue-100">{selectedObra.descripcion}</p>
+              </div>
+
+              <div className="p-6 space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="flex items-start gap-3 p-4 bg-cyan-50 rounded-lg">
+                    <MapPin className="w-6 h-6 text-cyan-600 flex-shrink-0" />
+                    <div>
+                      <p className="text-sm text-gray-600">Provincia</p>
+                      <p className="font-semibold text-gray-900">{selectedObra.provincia}</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3 p-4 bg-green-50 rounded-lg">
+                    <DollarSign className="w-6 h-6 text-green-600 flex-shrink-0" />
+                    <div>
+                      <p className="text-sm text-gray-600">Inversión Total</p>
+                      <p className="font-semibold text-gray-900">
+                        S/ {selectedObra.monto_inversion?.toLocaleString('es-PE')}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3 p-4 bg-purple-50 rounded-lg">
+                    <Building className="w-6 h-6 text-purple-600 flex-shrink-0" />
+                    <div>
+                      <p className="text-sm text-gray-600">Contratista</p>
+                      <p className="font-semibold text-gray-900">{selectedObra.contratista}</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3 p-4 bg-orange-50 rounded-lg">
+                    <Calendar className="w-6 h-6 text-orange-600 flex-shrink-0" />
+                    <div>
+                      <p className="text-sm text-gray-600">Periodo</p>
+                      <p className="font-semibold text-gray-900">
+                        {new Date(selectedObra.fecha_inicio).toLocaleDateString('es-PE')} - 
+                        {new Date(selectedObra.fecha_fin).toLocaleDateString('es-PE')}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <div>
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-sm font-medium text-gray-700">Avance Físico</span>
+                      <span className="text-sm font-bold text-cyan-600">{selectedObra.avance_fisico}%</span>
+                    </div>
+                    <div className="w-full bg-gray-200 rounded-full h-4">
+                      <div
+                        className="bg-gradient-to-r from-cyan-500 to-cyan-600 h-4 rounded-full"
+                        style={{ width: `${selectedObra.avance_fisico}%` }}
+                      ></div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-sm font-medium text-gray-700">Avance Financiero</span>
+                      <span className="text-sm font-bold text-green-600">{selectedObra.avance_financiero}%</span>
+                    </div>
+                    <div className="w-full bg-gray-200 rounded-full h-4">
+                      <div
+                        className="bg-gradient-to-r from-green-500 to-green-600 h-4 rounded-full"
+                        style={{ width: `${selectedObra.avance_financiero}%` }}
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+
+                <button
+                  onClick={() => setSelectedObra(null)}
+                  className="w-full py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors font-medium"
+                >
+                  Cerrar
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
 
 </body>
 </html>
+
 
 
 
