@@ -3,53 +3,58 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard Interactivo PRONIS Cusco</title>
+  <title>Dashboard PRONIS Cusco - GaDiel</title>
 
-  <!-- Estilos -->
   <style>
     body {
       margin: 0;
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       background-color: #0f172a;
-      color: #f8fafc;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 100vh;
+      color: #f1f5f9;
     }
 
     h1 {
       color: #38bdf8;
       margin-bottom: 20px;
-      font-size: 2em;
+      font-size: 1.8rem;
       text-align: center;
     }
 
     iframe {
-      border: none;
       width: 90vw;
       height: 80vh;
-      border-radius: 12px;
-      box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 0 25px rgba(56, 189, 248, 0.3);
     }
 
-    footer {
-      margin-top: 10px;
-      font-size: 0.9em;
-      color: #94a3b8;
+    a.volver {
+      color: #38bdf8;
+      margin-top: 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    a.volver:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
-<body>
-  <h1>Dashboard Interactivo - PRONIS Cusco</h1>
 
-  <!-- Inserta aquí tu dashboard -->
+<body>
+  <h1>Dashboard Interactivo PRONIS Cusco</h1>
+
+  <!-- 🔹 Aquí reemplaza con tu link público de Power BI -->
   <iframe 
-    src="https://app.powerbi.com/view?r=TU-LINK-DE-POWERBI-AQUI" 
+    src="https://app.powerbi.com/view?r=TU_LINK_DE_POWERBI_AQUI" 
     allowFullScreen="true">
   </iframe>
 
-  <footer>© 2025 Gabriela Isabel Gamarra Bautista</footer>
+  <a href="index.html" class="volver">← Volver al inicio</a>
 </body>
 </html>
